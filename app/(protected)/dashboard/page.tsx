@@ -5,7 +5,19 @@ export default async function DashboardPage() {
   const user = await getSessionUser();
   if (!user) return null;
 
-  // Mock data for proceedings
+  // Dynamic greeting based on server-side time
+  const now = new Date();
+  const hour = now.getUTCHours() + 0; // Ghana is UTC+0
+  const greeting =
+    hour < 12 ? "Good Morning" : hour < 17 ? "Good Afternoon" : "Good Evening";
+  const todayFormatted = now.toLocaleDateString("en-GH", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "Africa/Accra",
+  });
+
   const todaysProceedings = [
     {
       caseNumber: "VRHC-JC-2026-0014",
@@ -138,7 +150,7 @@ export default async function DashboardPage() {
           marginBottom: "8px",
           display: "block"
         }}>
-          Good Morning, Registrar
+          {greeting}, {user.role}
         </span>
         <h1 style={{ fontSize: "32px", fontWeight: 700, margin: 0, lineHeight: 1.2 }}>
           Volta Regional House of Chiefs
@@ -158,7 +170,7 @@ export default async function DashboardPage() {
           fontWeight: 500,
           opacity: 0.9
         }}>
-          <span>📅 Thursday, 4 August 2026</span>
+          <span>📅 {todayFormatted}</span>
           <span>Institution: Ho Secretariat</span>
         </div>
       </div>

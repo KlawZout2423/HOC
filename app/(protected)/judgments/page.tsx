@@ -35,9 +35,9 @@ export default async function JudgmentsPage() {
           <h1 className="page-title">Judgments & Rulings</h1>
           <p className="page-subtitle">Lookup historical precedents, search court judgments, and review gazetted declarations.</p>
         </div>
-        <button className="button" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+        <Link href="/judgments/create" className="button" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           <span>⚖️</span> Record Judgment
-        </button>
+        </Link>
       </div>
 
       {/* Stats */}

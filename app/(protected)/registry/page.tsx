@@ -46,9 +46,9 @@ export default async function RegistryPage() {
           <h1 className="page-title">Registry & Mail</h1>
           <p className="page-subtitle">Log incoming letters, trace paper trails, index documents, and manage traditional council archives.</p>
         </div>
-        <button className="button" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+        <Link href="/registry/create" className="button" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           <span>＋</span> Log Correspondence
-        </button>
+        </Link>
       </div>
 
       {/* Stats */}
@@ -90,9 +90,9 @@ export default async function RegistryPage() {
                   </span>
                 </td>
                 <td style={{ textAlign: "right" }}>
-                  <button className="link-button" style={{ fontSize: "13px", fontWeight: 600 }}>
+                  <Link href="/registry/create?mode=index" className="link-button" style={{ fontSize: "13px", fontWeight: 600 }}>
                     Index Record
-                  </button>
+                  </Link>
                 </td>
               </tr>
             ))}

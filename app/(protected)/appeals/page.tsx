@@ -35,9 +35,9 @@ export default async function AppealsPage() {
           <h1 className="page-title">Appeals Log</h1>
           <p className="page-subtitle">Track stool or traditional council decisions appealed to national levels or external review panels.</p>
         </div>
-        <button className="button" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+        <Link href="/appeals/create" className="button" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           <span>🏛️</span> File Appeal Record
-        </button>
+        </Link>
       </div>
 
       {/* Stats */}

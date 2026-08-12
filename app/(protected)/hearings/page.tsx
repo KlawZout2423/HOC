@@ -39,9 +39,9 @@ export default async function HearingsPage() {
           <h1 className="page-title">Hearings & Cause List</h1>
           <p className="page-subtitle">Schedule judicial committee panels, record sitting minutes, and publish official cause lists.</p>
         </div>
-        <button className="button" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+        <Link href="/hearings/create" className="button" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           <span>📅</span> Schedule Sitting
-        </button>
+        </Link>
       </div>
 
       {/* Stats */}
@@ -87,9 +87,9 @@ export default async function HearingsPage() {
                   </span>
                 </td>
                 <td style={{ textAlign: "right" }}>
-                  <button className="link-button" style={{ fontSize: "13px", fontWeight: 600 }}>
+                  <Link href="/hearings/create?mode=minutes" className="link-button" style={{ fontSize: "13px", fontWeight: 600 }}>
                     Record Minutes
-                  </button>
+                  </Link>
                 </td>
               </tr>
             ))}

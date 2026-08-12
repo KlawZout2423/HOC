@@ -614,6 +614,18 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--danger-mid);
 }
 
+.status-progress {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary-mid);
+}
+
+.status-archived {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+
 /* ──────────────────────────────────────────────
    SIDEBAR BADGE
 ────────────────────────────────────────────── */
