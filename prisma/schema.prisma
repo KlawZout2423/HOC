@@ -1,0 +1,211 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  roleId    String?
+  role      Role?    @relation(fields: [roleId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  auditLogs     AuditLog[]
+  notifications Notification[]
+  uploadedDocs  Document[]     @relation("UploadedDocs")
+
+  @@map("users")
+}
+
+model Role {
+  id          String       @id @default(uuid())
+  name        String       @unique // e.g., "Administrator", "Registrar", "Panel Member"
+  description String?
+  users       User[]
+  permissions Permission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  code        String   @unique // e.g., "READ_CASES", "WRITE_CASES", "APPROVE_JUDGMENT"
+  description String?
+  roles       Role[]
+
+  @@map("permissions")
+}
+
+model District {
+  id               String            @id @default(uuid())
+  name             String            @unique // e.g., Ho, Kpando, Hohoe
+  traditionalAreas TraditionalArea[]
+
+  @@map("districts")
+}
+
+model TraditionalArea {
+  id         String   @id @default(uuid())
+  name       String   @unique // e.g., Awudome, Anfoega, Gbi
+  districtId String
+  district   District @relation(fields: [districtId], references: [id])
+  cases      Case[]
+
+  @@map("traditional_areas")
+}
+
+model Case {
+  id                String          @id @default(uuid())
+  caseNumber        String          @unique // e.g., VRHC-JC-2026-0001
+  title             String
+  description       String?         @db.Text
+  status            String          @default("FILED") // FILED, HEARINGS, AWAITING_JUDGMENT, DECIDED, APPEALED, ARCHIVED
+  caseType          String          @default("STOOL_DISPUTE") // STOOL_DISPUTE, LAND_DISPUTE, GAZETTE_CHALLENGE
+  filingDate        DateTime        @default(now())
+  
+  traditionalAreaId String
+  traditionalArea   TraditionalArea @relation(fields: [traditionalAreaId], references: [id])
+  
+  parties           Party[]
+  hearings          Hearing[]
+  judgments         Judgment[]
+  appeals           Appeal[]
+  documents         Document[]
+  panels            Panel[]
+
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@map("cases")
+}
+
+model Party {
+  id         String   @id @default(uuid())
+  caseId     String
+  case       Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  name       String
+  role       String   // CLAIMANT, DEFENDANT, PETITIONER, RESPONDENT
+  address    String?
+  contact    String?
+  createdAt  DateTime @default(now())
+
+  @@map("parties")
+}
+
+model Panel {
+  id        String   @id @default(uuid())
+  name      String   // e.g., Judicial Committee Panel A
+  caseId    String
+  case      Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  members   String[] // Presiding panel members' details
+  createdAt DateTime @default(now())
+
+  @@map("panels")
+}
+
+model Hearing {
+  id           String   @id @default(uuid())
+  caseId       String
+  case         Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  date         DateTime
+  location     String   @default("VRHC Conference Room, Ho")
+  sittingNotes String?  @db.Text
+  status       String   @default("SCHEDULED") // SCHEDULED, COMPLETED, POSTPONED
+  createdAt    DateTime @default(now())
+
+  @@map("hearings")
+}
+
+model Judgment {
+  id                    String   @id @default(uuid())
+  caseId                String
+  case                  Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  date                  DateTime @default(now())
+  summary               String   @db.Text
+  writtenRulingUrl      String?
+  panelPresidentDetails String?
+  createdAt             DateTime @default(now())
+
+  @@map("judgments")
+}
+
+model Appeal {
+  id                String   @id @default(uuid())
+  originalCaseId    String
+  case              Case     @relation(fields: [originalCaseId], references: [id], onDelete: Cascade)
+  appealCaseNumber  String   @unique
+  details           String   @db.Text
+  status            String   @default("PENDING") // PENDING, DECIDED
+  dateFiled         DateTime @default(now())
+  createdAt         DateTime @default(now())
+
+  @@map("appeals")
+}
+
+model Document {
+  id           String   @id @default(uuid())
+  title        String
+  fileUrl      String
+  fileType     String?
+  fileSize     Int?
+  
+  uploadedById String
+  uploadedBy   User     @relation("UploadedDocs", fields: [uploadedById], references: [id])
+  
+  caseId       String?
+  case         Case?    @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  registryRecord RegistryRecord?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("documents")
+}
+
+model RegistryRecord {
+  id              String    @id @default(uuid())
+  referenceNumber String    @unique // e.g., VRHC-REG-2026-X8
+  senderName      String
+  recipientName   String
+  dateReceived    DateTime  @default(now())
+  actionNeeded    String?
+  status          String    @default("PENDING") // PENDING, RESOLVED
+  
+  documentId      String    @unique
+  document        Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime  @default(now())
+
+  @@map("registry_records")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  action    String   // e.g., CREATE_CASE, UPLOAD_DOCUMENT
+  details   String?  @db.Text
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
+
