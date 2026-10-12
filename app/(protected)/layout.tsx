@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import { getSessionUser } from "../lib/auth";
 import { Sidebar } from "./Sidebar";
+import AiChatBot from "./AiChatBot";
 
 interface ProtectedLayoutProps {
   children: ReactNode;
@@ -18,6 +19,7 @@ export default async function ProtectedLayout({ children }: ProtectedLayoutProps
     <div className="app-shell">
       <Sidebar user={user} />
       <section className="content">{children}</section>
+      <AiChatBot />
     </div>
   );
 }

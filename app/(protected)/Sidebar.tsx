@@ -49,7 +49,8 @@ export function Sidebar({ user }: SidebarProps) {
               width: "30px",
               height: "30px",
               borderRadius: "50%",
-              background: "linear-gradient(135deg, var(--warning) 0%, #b45309 100%)",
+              background: "linear-gradient(135deg, var(--heritage-red) 0%, #991b1b 100%)",
+              border: "1px solid var(--warning)",
               color: "white",
               display: "flex",
               alignItems: "center",
@@ -83,6 +84,33 @@ export function Sidebar({ user }: SidebarProps) {
           <span style={{ fontSize: "16px", width: "22px", textAlign: "center", flexShrink: 0 }}>⊞</span>
           <span style={{ flex: 1 }}>Dashboard</span>
         </Link>
+
+        {/* AI Judicial Assistant Launcher */}
+        <button
+          type="button"
+          id="sidebar-ai-assistant-btn"
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              window.dispatchEvent(new CustomEvent("open-ai-chat"));
+            }
+          }}
+          className="nav-item"
+          style={{
+            background: "linear-gradient(90deg, rgba(99, 102, 241, 0.22) 0%, rgba(30, 58, 138, 0.28) 100%)",
+            border: "1px solid rgba(165, 180, 252, 0.25)",
+            color: "#e0e7ff",
+            cursor: "pointer",
+            width: "100%",
+            textAlign: "left",
+            marginTop: "4px"
+          }}
+        >
+          <span style={{ fontSize: "16px", width: "22px", textAlign: "center", flexShrink: 0 }}>✨</span>
+          <span style={{ flex: 1, fontWeight: 600 }}>Ask AI Assistant</span>
+          <span style={{ background: "#4f46e5", color: "#ffffff", padding: "2px 6px", borderRadius: "4px", fontSize: "10px", fontWeight: 700 }}>
+            BOT
+          </span>
+        </button>
 
         <span className="nav-section-label" style={{ marginTop: "12px" }}>Case Management</span>
         

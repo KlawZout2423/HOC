@@ -189,7 +189,7 @@ export default function RecordJudgmentPage() {
                     >
                       <option value="STOOL_CONFIRMATION">Stool Succession Confirmation (Enstoolment Validated)</option>
                       <option value="STOOL_DESTITUTION">Stool Destoolment / Deposition Declaration</option>
-                      <option value="BOUNDARY_DEMARCATION">Traditional Boundary Land Award / Demarcation</option>
+                      <option value="STOOL_BOUNDARY">Stool Boundary Arbitration Award (Chieftaincy Jurisdiction)</option>
                       <option value="CUSTOMARY_LAW">Customary Rite Declaration / Amendment</option>
                     </select>
                   </div>

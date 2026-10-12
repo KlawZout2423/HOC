@@ -20,7 +20,7 @@ export default async function JudgmentsPage() {
     {
       id: "jud-2",
       caseNumber: "VRHC-JC-2025-0005",
-      caseTitle: "Gbi Boundary Arbitration Dispute",
+      caseTitle: "Gbi Stool Boundary Arbitration Dispute",
       rulingDate: "2025-06-14",
       panelPresident: "Togbe Worde IV",
       gazetteStatus: "PENDING_PUBLICATION",

@@ -259,25 +259,25 @@ export default function ScheduleSittingPage() {
                   <p style={{ margin: "0 0 16px", fontSize: "15px", color: "var(--muted)" }}>Verify the details. Confirming this step schedules the sitting and notifies panel members.</p>
 
                   <div style={{ background: "#f8fafc", border: "1px solid var(--border)", borderRadius: "var(--radius)", padding: "20px", display: "grid", gap: "12px" }}>
-                    <div style={{ display: "flex", justifySpaceBetween: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
                       <span style={{ fontWeight: 500, color: "var(--muted)" }}>Associated Case:</span>
                       <span style={{ fontWeight: 600, color: "var(--foreground)", textAlign: "right" }}>
                         {caseId === "case-101" ? "VRHC-JC-2026-0004 (Asogli)" : caseId === "case-102" ? "VRHC-JC-2025-0019 (Anfoega)" : "VRHC-JC-2026-0001 (Gbi)"}
                       </span>
                     </div>
-                    <div style={{ display: "flex", justifySpaceBetween: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
                       <span style={{ fontWeight: 500, color: "var(--muted)" }}>Judicial Panel:</span>
                       <span style={{ fontWeight: 600, color: "var(--foreground)" }}>{panel}</span>
                     </div>
-                    <div style={{ display: "flex", justifySpaceBetween: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
                       <span style={{ fontWeight: 500, color: "var(--muted)" }}>Sitting Schedule:</span>
                       <span style={{ fontWeight: 600, color: "var(--foreground)" }}>{date} at {time}</span>
                     </div>
-                    <div style={{ display: "flex", justifySpaceBetween: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--border)", paddingBottom: "8px" }}>
                       <span style={{ fontWeight: 500, color: "var(--muted)" }}>Location Venue:</span>
                       <span style={{ fontWeight: 600, color: "var(--foreground)" }}>{location}</span>
                     </div>
-                    <div style={{ display: "flex", justifySpaceBetween: "space-between" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
                       <span style={{ fontWeight: 500, color: "var(--muted)" }}>Sitting Purpose:</span>
                       <span style={{ fontWeight: 600, color: "var(--foreground)", textTransform: "uppercase" }}>{purpose}</span>
                     </div>

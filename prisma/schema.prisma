@@ -65,7 +65,7 @@ model Case {
   title             String
   description       String?         @db.Text
   status            String          @default("FILED") // FILED, HEARINGS, AWAITING_JUDGMENT, DECIDED, APPEALED, ARCHIVED
-  caseType          String          @default("STOOL_DISPUTE") // STOOL_DISPUTE, LAND_DISPUTE, GAZETTE_CHALLENGE
+  caseType          String          @default("STOOL_DISPUTE") // STOOL_DISPUTE, DESTOOLMENT_PETITION, GAZETTE_CHALLENGE, CHIEFTAINCY_DECLARATION, COUNCIL_APPEAL
   filingDate        DateTime        @default(now())
   
   traditionalAreaId String
